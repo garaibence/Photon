@@ -209,6 +209,60 @@ void CameraGPhoto2::set_bulb_speed(size_t speed)
     // Note: Actual implementation to set bulb speed may vary based on camera capabilities
 }
 
+std::vector<std::string> CameraGPhoto2::list_shutter_speed() const
+{
+    CameraWidget *rootconfig = nullptr, *child = nullptr;
+    if (gp_camera_get_config(camera, &rootconfig, context) < GP_OK) {
+        std::cout << "Failed to get camera config." << std::endl;
+        return std::vector<std::string>();
+    }
+
+    if (gp_widget_get_child_by_name(rootconfig, "shutterspeed", &child) < GP_OK) {
+        std::cout << "Shutter speed setting not found." << std::endl;
+        gp_widget_free(rootconfig);
+        return std::vector<std::string>();
+    }
+    
+    int count = gp_widget_count_choices(child);
+    std::vector<std::string> choices;
+    
+    for (int i = 0; i < count; ++i) {
+        const char *choice = nullptr;
+        if (gp_widget_get_choice(child, i, &choice) == GP_OK && choice) {
+            choices.push_back(choice);
+        }
+    }
+    gp_widget_free(rootconfig);
+    return choices;
+}
+
+std::vector<std::string> CameraGPhoto2::list_iso() const
+{
+    CameraWidget *rootconfig = nullptr, *child = nullptr;
+    if (gp_camera_get_config(camera, &rootconfig, context) < GP_OK) {
+        std::cout << "Failed to get camera config." << std::endl;
+        return std::vector<std::string>();
+    }
+
+    if (gp_widget_get_child_by_name(rootconfig, "iso", &child) < GP_OK) {
+        std::cout << "Shutter speed setting not found." << std::endl;
+        gp_widget_free(rootconfig);
+        return std::vector<std::string>();
+    }
+    
+    int count = gp_widget_count_choices(child);
+    std::vector<std::string> choices;
+    
+    for (int i = 0; i < count; ++i) {
+        const char *choice = nullptr;
+        if (gp_widget_get_choice(child, i, &choice) == GP_OK && choice) {
+            choices.push_back(choice);
+        }
+    }
+    gp_widget_free(rootconfig);
+    return choices;
+}
+
 int CameraGPhoto2::SHOOT(const char *filename)
 {
     CameraFilePath camera_file_path;

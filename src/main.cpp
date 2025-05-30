@@ -22,6 +22,25 @@ int main(int argc, char const *argv[])
     std::cout << "Current Shutter Speed: " << cam.get_shutter_speed() << std::endl;
     */
 
+
+    std::vector<std::string> choices = cam.list_shutter_speed();
+    std::cout << choices.size() << std::endl;
+    std::cout << "Available shutter speeds:" << std::endl;
+
+    for (std::string choice: choices)
+    {
+        std::cout << choice << std::endl;
+    }
+
+    choices = cam.list_iso();
+    std::cout << choices.size() << std::endl;
+    std::cout << "Available ISOs:" << std::endl;
+    for (std::string choice: choices)
+    {
+        std::cout << choice << std::endl;
+    }
+    /*
+
     cam.set_iso("100");
     std::cout << "ISO set to: " << cam.get_iso() << std::endl;
 
@@ -47,6 +66,8 @@ int main(int argc, char const *argv[])
         snprintf(filename, sizeof(filename), "./testphotos/Lights/Light_%04zu.cr2", i + 1);
         cam.SHOOT(filename);
     }
+
+    */
 
     // Cleanup
     // gp_camera_exit(camera, context);

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <gphoto2/gphoto2.h>
+#include <vector>
 
 class RootCamera
 {
@@ -18,6 +19,9 @@ public:
     virtual void set_iso(const char *iso) = 0;
     virtual void set_shutter_speed(const char *shutterType) = 0;
     virtual void set_bulb_speed(size_t speed) = 0;
+
+    virtual std::vector<std::string> list_shutter_speed() const = 0;
+    virtual std::vector<std::string> list_iso() const = 0;
 
     virtual int SHOOT(const char *filename) = 0;
 };
@@ -44,6 +48,9 @@ public:
     void set_iso(const char *iso) override;
     void set_shutter_speed(const char *shutter_type) override;
     void set_bulb_speed(size_t speed) override;
+
+    std::vector<std::string> list_shutter_speed() const override;
+    std::vector<std::string> list_iso() const override;
 
     int SHOOT(const char *filename) override;
 };
