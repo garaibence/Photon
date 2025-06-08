@@ -8,11 +8,13 @@ StellarPI/
 │   ├── main.cpp
 │   ├── camera/
 │   ├── focuser/
-│   └── mount/
+│   ├── mount/
+│   └── processing/
 ├── include/              # C++ header files
 │   ├── camera/
 │   ├── focuser/
-│   └── mount/
+│   ├── mount/
+│   └── processing/
 ├── configs/              # Configurations
 ├── docs/                 # Documentation
 ├── scripts/              # Build, install, deploy scripts
